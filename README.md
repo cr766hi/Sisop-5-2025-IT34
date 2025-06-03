@@ -4,7 +4,8 @@
 
 Nama | NRP
 --- | ---
-Amoes Noland | 5027231028
+Christiano Ronaldo Silalahi | 5027241025
+
 Rafi' Afnaan Fathurrahman | 5027231040
 
 ## Daftar Isi
