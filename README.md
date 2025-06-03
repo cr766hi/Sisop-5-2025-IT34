@@ -5,8 +5,9 @@
 Nama | NRP
 --- | ---
 Christiano Ronaldo Silalahi | 5027241025
+Naila Cahyarani Idelia      | 5027241063
+Daniswara Fausta Novanto    | 5027241050
 
-Rafi' Afnaan Fathurrahman | 5027231040
 
 ## Daftar Isi
 
