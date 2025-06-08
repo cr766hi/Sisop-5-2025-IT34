@@ -1,35 +1,37 @@
-CC = gcc
-CFLAGS = -m32 -nostdlib -nostdinc -fno-builtin -fno-stack-protector \
-         -nostartfiles -nodefaultlibs -Wall -Wextra -c
-LD = ld
-LDFLAGS = -m elf_i386 -Ttext 0x1000
+CC = bcc
+LD = ld86
 ASM = nasm
-ASMFLAGS = -f elf
+
+CFLAGS = -ansi -I./include -c
+ASMFLAGS_BOOT = -f bin
+ASMFLAGS_KERNEL = -f as86
+LDFLAGS = -d
 
 all: build
 
 prepare:
+	mkdir -p bin
 	dd if=/dev/zero of=bin/floppy.img bs=512 count=2880
 
 bootloader:
-	$(ASM) src/bootloader.asm -o bin/bootloader.bin
-	dd if=bin/bootloader.bin of=bin/floppy.img conv=notrunc
+	$(ASM) $(ASMFLAGS_BOOT) src/bootloader.asm -o bin/bootloader.bin
+	dd if=bin/bootloader.bin of=bin/floppy.img bs=512 count=1 conv=notrunc
 
 stdlib:
 	$(CC) $(CFLAGS) src/std_lib.c -o bin/std_lib.o
 
-shell:
+shell: stdlib
 	$(CC) $(CFLAGS) src/shell.c -o bin/shell.o
 
-kernel:
+kernel: stdlib
 	$(CC) $(CFLAGS) src/kernel.c -o bin/kernel.o
-	$(ASM) $(ASMFLAGS) src/kernel.asm -o bin/kernel_asm.o
+	$(ASM) $(ASMFLAGS_KERNEL) src/kernel.asm -o bin/kernel_asm.o
 
-link:
+link: kernel shell
 	$(LD) $(LDFLAGS) -o bin/kernel.bin bin/kernel.o bin/kernel_asm.o bin/std_lib.o bin/shell.o
 	dd if=bin/kernel.bin of=bin/floppy.img bs=512 seek=1 conv=notrunc
 
-build: prepare bootloader stdlib shell kernel link
+build: prepare bootloader link
 
 clean:
 	rm -f bin/*.o bin/*.bin bin/floppy.img
