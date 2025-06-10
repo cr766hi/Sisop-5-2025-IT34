@@ -191,6 +191,7 @@ https://github.com/user-attachments/assets/1cfa66b1-b2f5-4e3e-a4b2-ec8b012f6fbb
 ## Laporan
 
 1. Echo Mode (Default)
+
 Semua input yang bukan command valid akan di-echo ulang:
 
 bash```
@@ -235,11 +236,13 @@ output :
 
 
 2. Gurt/Yo Swap
-    Fungsi ini menangani input dari pengguna dan memprosesnya.
+Fungsi ini menangani input dari pengguna dan memprosesnya.
 Untuk nomor ini masih belum memiliki implementasi nya
 
 3. User Command
+
 `user <username>`: ubah `username`.
+
 `user`: reset ke default `"user"`.
 
    Fungsi ini menangani perintah user untuk mengubah username shell.
@@ -258,6 +261,7 @@ if (strcmp(cmd, "user")) {
 ```
 
 4. Grand Company Color Change
+
 Command `grandcompany maelstrom/twinadder/immortalflames`.
 
 Mengubah warna terminal + mengganti title prompt (`@Storm`, `@Serpent`, `@Flame`).
@@ -304,7 +308,8 @@ else if (strcmp(cmd, "clear")) {
 ```
 
 5. Kalkulator Sederhana
-   Fungsi ini menangani perintah kalkulasi dari pengguna seperti add, sub, mul, dan div.
+
+Fungsi ini menangani perintah kalkulasi dari pengguna seperti add, sub, mul, dan div.
 ```c
 else if (strcmp(cmd, "add") || strcmp(cmd, "sub") || 
              strcmp(cmd, "mul") || strcmp(cmd, "div")) {
@@ -326,7 +331,8 @@ else if (strcmp(cmd, "add") || strcmp(cmd, "sub") ||
 ```
 
 6. Yogurt Easter Egg
-   Fungsi ini menangani perintah yogurt yang memberikan output acak dari tiga pilihan yang disiapkan (`yo`, `ts unami gng </3`, `sygau`).
+
+Fungsi ini menangani perintah yogurt yang memberikan output acak dari tiga pilihan yang disiapkan (`yo`, `ts unami gng </3`, `sygau`).
 ```c
 else if (strcmp(cmd, "yogurt")) {
       // Random responses
