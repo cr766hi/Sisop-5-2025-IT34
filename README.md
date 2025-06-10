@@ -190,7 +190,12 @@ https://github.com/user-attachments/assets/1cfa66b1-b2f5-4e3e-a4b2-ec8b012f6fbb
 
 ## Laporan
 
-1. Jawaban:
+1. Echo Mode (Default)
+Semua input yang bukan command valid akan di-echo ulang:
+
+bash```
+printString(buf);
+```
 Fungsi `readString` :
    Fungsi ini digunakan untuk membaca input dari pengguna melalui keyboard.
 ```c
@@ -229,11 +234,14 @@ output :
 ![image](https://github.com/user-attachments/assets/e3e99075-7871-45c0-9cb4-86bc0c4054b8)
 
 
-2. Jawaban:
+2. Gurt/Yo Swap
     Fungsi ini menangani input dari pengguna dan memprosesnya.
 Untuk nomor ini masih belum memiliki implementasi nya
 
-3. Jawaban:
+3. User Command
+`user <username>`: ubah `username`.
+`user`: reset ke default `"user"`.
+
    Fungsi ini menangani perintah user untuk mengubah username shell.
 ```c
 if (strcmp(cmd, "user")) {
@@ -249,7 +257,13 @@ if (strcmp(cmd, "user")) {
     }
 ```
 
-4. Jawaban:
+4. Grand Company Color Change
+Command `grandcompany maelstrom/twinadder/immortalflames`.
+
+Mengubah warna terminal + mengganti title prompt (`@Storm`, `@Serpent`, `@Flame`).
+
+`clear`: reset warna dan title.
+
 Fungsi `shell`:
    Fungsi ini menangani perintah grandcompany untuk bergabung dengan Grand Company tertentu dan mengubah prompt shell.
 ```c
@@ -289,7 +303,7 @@ else if (strcmp(cmd, "clear")) {
     }
 ```
 
-5. Jawaban:
+5. Kalkulator Sederhana
    Fungsi ini menangani perintah kalkulasi dari pengguna seperti add, sub, mul, dan div.
 ```c
 else if (strcmp(cmd, "add") || strcmp(cmd, "sub") || 
@@ -311,8 +325,8 @@ else if (strcmp(cmd, "add") || strcmp(cmd, "sub") ||
     }
 ```
 
-6. Jawaban:
-   Fungsi ini menangani perintah yogurt yang memberikan output acak dari tiga pilihan yang disiapkan.
+6. Yogurt Easter Egg
+   Fungsi ini menangani perintah yogurt yang memberikan output acak dari tiga pilihan yang disiapkan (`yo`, `ts unami gng </3`, `sygau`).
 ```c
 else if (strcmp(cmd, "yogurt")) {
       // Random responses
