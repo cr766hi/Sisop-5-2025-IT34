@@ -97,7 +97,11 @@ Pada suatu hari, anda merasa sangat lelah dari segala macam praktikum yang sudah
    3
    ```
 
-6. me: yogurt
+   output :
+
+   ![image](https://github.com/user-attachments/assets/58cba41f-c0e6-44e4-8f05-231924f3ce77)
+
+7. me: yogurt
    
    gurt:
    * `yo`
@@ -115,6 +119,11 @@ Pada suatu hari, anda merasa sangat lelah dari segala macam praktikum yang sudah
    user> yogurt
    gurt> sygau
    ```
+
+output :
+
+![image](https://github.com/user-attachments/assets/435b4c32-5472-4906-a428-0a75c32674c1)
+
 
 8. Perusahaan mesin "Garlond Ironworks" tiba-tiba lelah mengurus permintaan senjata perang untuk orang ke-148649813234 yang berusaha menghadapi final boss yang sama, sehingga mereka perlu bantuan kamu untuk melengkapi `Makefile` yang diberikan dengan command-command yang sesuai untuk compile seluruh operating system ini.
 
