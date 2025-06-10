@@ -181,4 +181,173 @@ https://github.com/user-attachments/assets/1cfa66b1-b2f5-4e3e-a4b2-ec8b012f6fbb
 
 ## Laporan
 
-> Isi sesuai pengerjaan.
+1. Jawaban:
+Fungsi `readString` :
+   Fungsi ini digunakan untuk membaca input dari pengguna melalui keyboard.
+```c
+  void readString(char *buf) {
+    int i = 0;
+    while (1) {
+        char c = interrupt(0x16, 0, 0, 0, 0);
+        if (c == '\r' || c == '\n') {
+            buf[i] = '\0';
+            printString("\r\n");
+            return;
+        } else if (c == '\b' && i > 0) {
+            i--;
+            printString("\b \b");
+        } else if (c >= 32 && c <= 126) {
+            buf[i++] = c;
+            interrupt(0x10, 0x0E00 | c, 0, 0, 0);
+        }
+    }
+}
+```
+
+Fungsi `printString` :
+    Fungsi ini digunakan untuk menampilkan string yang diberikan.
+```c
+void printString(char *str) {
+    while (*str) {
+        interrupt(0x10, 0x0E00 | *str, 0, 0, 0);
+        str++;
+    }
+}
+```
+
+2. Jawaban:
+    Fungsi ini menangani input dari pengguna dan memprosesnya.
+Untuk nomor ini masih belum memiliki implementasi nya
+
+3. Jawaban:
+   Fungsi ini menangani perintah user untuk mengubah username shell.
+```c
+if (strcmp(cmd, "user")) {
+      if (strcmp(args[0], "")) {
+        strcpy(username, args[0]);
+        printString("Username changed to ");
+        printString(username);
+        printString("\n");
+      } else {
+        strcpy(username, "user");
+        printString("Username changed to user\n");
+      }
+    }
+```
+
+4. Jawaban:
+Fungsi `shell`:
+   Fungsi ini menangani perintah grandcompany untuk bergabung dengan Grand Company tertentu dan mengubah prompt shell.
+```c
+else if (strcmp(cmd, "grandcompany")) {
+      if (strcmp(args[0], "maelstrom")) {
+        clearScreen();
+        textColor = 0x04; // Red
+        strcpy(grandcompany, "Storm");
+      }
+      else if (strcmp(args[0], "twinadder")) {
+        clearScreen();
+        textColor = 0x0E; // Yellow
+        strcpy(grandcompany, "Serpent");
+      }
+      else if (strcmp(args[0], "immortalflames")) {
+        clearScreen();
+        textColor = 0x01; // Blue
+        strcpy(grandcompany, "Flame");
+      }
+      else if (strcmp(args[0], "clear")) {
+        clearScreen();
+        textColor = 0x07; // White
+        strcpy(grandcompany, "");
+      }
+      else {
+        printString("Error: Invalid grand company\n");
+      }
+    }
+```
+
+Fungsi `clear`:
+```c
+else if (strcmp(cmd, "clear")) {
+      clearScreen();
+      textColor = 0x07;
+      strcpy(grandcompany, "");
+    }
+```
+
+5. Jawaban:
+   Fungsi ini menangani perintah kalkulasi dari pengguna seperti add, sub, mul, dan div.
+```c
+else if (strcmp(cmd, "add") || strcmp(cmd, "sub") || 
+             strcmp(cmd, "mul") || strcmp(cmd, "div")) {
+        int x, y, result;
+        char numStr[16];
+        
+        atoi(args[0], &x);
+        atoi(args[1], &y);
+        
+        if (strcmp(cmd, "add")) result = x + y;
+        else if (strcmp(cmd, "sub")) result = x - y;
+        else if (strcmp(cmd, "mul")) result = x * y;
+        else if (strcmp(cmd, "div")) result = div(x, y);
+        
+        itoa(result, numStr);
+        printString(numStr);
+        printString("\n");
+    }
+```
+
+6. Jawaban:
+   Fungsi ini menangani perintah yogurt yang memberikan output acak dari tiga pilihan yang disiapkan.
+```c
+else if (strcmp(cmd, "yogurt")) {
+      // Random responses
+      int tick = getBiosTick();
+      switch (mod(tick, 3)) {
+        case 0: printString("yo\n"); break;
+        case 1: printString("ts unami gng </3\n"); break;
+        case 2: printString("sygau\n"); break;
+      }
+    }
+```
+
+7. Isi Makefile:
+```
+CC = bcc
+LD = ld86
+ASM = nasm
+
+CFLAGS = -ansi -I./include -c
+ASMFLAGS_BOOT = -f bin
+ASMFLAGS_KERNEL = -f as86
+LDFLAGS = -d
+
+all: build
+
+prepare:
+	mkdir -p bin
+	dd if=/dev/zero of=bin/floppy.img bs=512 count=2880
+
+bootloader:
+	$(ASM) $(ASMFLAGS_BOOT) src/bootloader.asm -o bin/bootloader.bin
+	dd if=bin/bootloader.bin of=bin/floppy.img bs=512 count=1 conv=notrunc
+
+stdlib:
+	$(CC) $(CFLAGS) src/std_lib.c -o bin/std_lib.o
+
+shell: stdlib
+	$(CC) $(CFLAGS) src/shell.c -o bin/shell.o
+
+kernel: stdlib
+	$(CC) $(CFLAGS) src/kernel.c -o bin/kernel.o
+	$(ASM) $(ASMFLAGS_KERNEL) src/kernel.asm -o bin/kernel_asm.o
+
+link: kernel shell
+	$(LD) $(LDFLAGS) -o bin/kernel.bin bin/kernel.o bin/kernel_asm.o bin/std_lib.o bin/shell.o
+	dd if=bin/kernel.bin of=bin/floppy.img bs=512 seek=1 conv=notrunc
+
+build: prepare bootloader link
+
+clean:
+	rm -f bin/*.o bin/*.bin bin/floppy.img
+```
