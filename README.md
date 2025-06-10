@@ -190,11 +190,11 @@ https://github.com/user-attachments/assets/1cfa66b1-b2f5-4e3e-a4b2-ec8b012f6fbb
 
 ## Laporan
 
-1. Echo Mode (Default)
+## 1. Echo Mode (Default)
 
 Semua input yang bukan command valid akan di-echo ulang:
 
-bash```
+```bash
 printString(buf);
 ```
 Fungsi `readString` :
@@ -235,11 +235,12 @@ output :
 ![image](https://github.com/user-attachments/assets/e3e99075-7871-45c0-9cb4-86bc0c4054b8)
 
 
-2. Gurt/Yo Swap
+## 2. Gurt/Yo Swap
+
 Fungsi ini menangani input dari pengguna dan memprosesnya.
 Untuk nomor ini masih belum memiliki implementasi nya
 
-3. User Command
+## 3. User Command
 
 `user <username>`: ubah `username`.
 
@@ -260,7 +261,7 @@ if (strcmp(cmd, "user")) {
     }
 ```
 
-4. Grand Company Color Change
+## 4. Grand Company Color Change
 
 Command `grandcompany maelstrom/twinadder/immortalflames`.
 
@@ -307,7 +308,7 @@ else if (strcmp(cmd, "clear")) {
     }
 ```
 
-5. Kalkulator Sederhana
+## 5. Kalkulator Sederhana
 
 Fungsi ini menangani perintah kalkulasi dari pengguna seperti add, sub, mul, dan div.
 ```c
@@ -330,7 +331,7 @@ else if (strcmp(cmd, "add") || strcmp(cmd, "sub") ||
     }
 ```
 
-6. Yogurt Easter Egg
+## 6. Yogurt Easter Egg
 
 Fungsi ini menangani perintah yogurt yang memberikan output acak dari tiga pilihan yang disiapkan (`yo`, `ts unami gng </3`, `sygau`).
 ```c
@@ -345,7 +346,7 @@ else if (strcmp(cmd, "yogurt")) {
     }
 ```
 
-7. Isi Makefile:
+## 7. Isi Makefile:
 ```
 CC = bcc
 LD = ld86
