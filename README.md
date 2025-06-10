@@ -215,6 +215,11 @@ void printString(char *str) {
 }
 ```
 
+output :
+
+![image](https://github.com/user-attachments/assets/e3e99075-7871-45c0-9cb4-86bc0c4054b8)
+
+
 2. Jawaban:
     Fungsi ini menangani input dari pengguna dan memprosesnya.
 Untuk nomor ini masih belum memiliki implementasi nya
